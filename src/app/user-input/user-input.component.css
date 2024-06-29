@@ -22,7 +22,7 @@ label {
   text-transform: uppercase;
 }
 
-input {
+input, select {
   width: 100%;
   padding: 0.5rem;
   border: 1px solid #76c0ae;
@@ -30,6 +30,10 @@ input {
   background-color: transparent;
   color: #c2e9e0;
   font-size: 1rem;
+}
+
+select option {
+  background-color: #1a1f1d;
 }
 
 button {
