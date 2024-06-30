@@ -1,21 +1,16 @@
-import { Component, EventEmitter, Input, Output, output, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, signal } from '@angular/core';
 
-import type { InvestmentInput } from '../investment-input.model';
-import { CURRENCIES } from '../currencies';
+import { InvestmentService } from '../investment.services';
 
 @Component({
   selector: 'app-user-input',
-  standalone: true,
-  imports: [FormsModule],
   templateUrl: './user-input.component.html',
   styleUrl: './user-input.component.css'
 })
+
 export class UserInputComponent {
   // @Output() calculate = new EventEmitter<InvestmentInput>()
   // @Output() updatedCurrencyCode = new EventEmitter<string>()
-  calculate = output<InvestmentInput>()
-  updatedCurrencyCode = output<string>()
 
   enteredInitialInvestment = signal('0')
   enteredAnnualInvestment = signal('0')
@@ -23,17 +18,20 @@ export class UserInputComponent {
   enteredDuration = signal('10')
   enteredCurrency = signal('USD')
 
-  currencyObject: {[key: string]: string} = CURRENCIES
-  currencyKeys: string[] = Object.keys(this.currencyObject)
+
+  constructor(private investmentService: InvestmentService) {}
+  currencyObjs = this.investmentService.currencyObjs()
+  currencyKeys = this.investmentService.currencyKeys()
 
   onSubmit() {
-    this.calculate.emit({
+    this.investmentService.onCalculateInvestmentResults({
       initialInvestment: +this.enteredInitialInvestment(),
       annualInvestment: +this.enteredAnnualInvestment(),
       expectedReturn: +this.enteredExpectedReturn(),
       duration: +this.enteredDuration(),
     })
-    this.updatedCurrencyCode.emit(this.enteredCurrency())
+
+    this.investmentService.onChangeCurrencyCode(this.enteredCurrency())
 
     this.enteredInitialInvestment.set('0')
     this.enteredAnnualInvestment.set('0')

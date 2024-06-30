@@ -25,7 +25,7 @@
       <!-- <input type="number" name="currency" id="currency" [(ngModel)]="enteredCurrency" /> -->
        <select name="currency" id="currency" [(ngModel)]="enteredCurrency">
         @for (currencyName of currencyKeys; track currencyName) {
-          <option [value]="currencyObject[currencyName]">{{currencyName}}</option>
+          <option [value]="currencyObjs[currencyName]">{{currencyName}}</option>
         }
        </select>
     </p>

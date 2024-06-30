@@ -16,10 +16,10 @@
       @for(result of results(); track result.year) {
         <tr>
           <td>{{ result.year }}</td>
-          <td>{{ result.valueEndOfYear | currency: currencyCode() }}</td>
-          <td>{{ result.interest | currency:currencyCode() }}</td>
-          <td>{{ result.totalInterest | currency:currencyCode() }}</td>
-          <td>{{ result.totalAmountInvested | currency:currencyCode() }}</td>
+          <td>{{ result.valueEndOfYear | currency: currencyCode }}</td>
+          <td>{{ result.interest | currency:currencyCode }}</td>
+          <td>{{ result.totalInterest | currency:currencyCode }}</td>
+          <td>{{ result.totalAmountInvested | currency:currencyCode }}</td>
         </tr>
       }
     </tbody>
